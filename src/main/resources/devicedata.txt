@@ -1,0 +1,4 @@
+{"device":"gas", "deviceType":"MK0", "signal":10, "time": "2018-12-22"},
+{"device":"oil", "deviceType":"MK2", "signal":12, "time": "2018-12-22"},
+{"device":"electric", "deviceType":"MK3", "signal":10, "time": "2018-12-22"},
+{"device":"water", "deviceType":"MK4", "signal":14, "time": "2018-12-22"}]
