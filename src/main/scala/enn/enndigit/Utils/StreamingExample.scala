@@ -1,4 +1,4 @@
-package enn.enndigit.toplink
+package enn.enndigit.Utils
 
 import org.apache.log4j.{Level, Logger}
 

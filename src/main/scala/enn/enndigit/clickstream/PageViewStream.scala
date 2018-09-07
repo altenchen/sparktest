@@ -39,6 +39,7 @@ object PageViewStream {
       .flatMap(_.split("\n"))
       .map(PageView.fromString(_))
 
+
     //统计每个批次的 URL
     val pageCounts = pageViews.map(view=> view.url).countByValue()
 
@@ -98,4 +99,7 @@ object PageViewStream {
     ssc.awaitTermination()
 
   }
+}
+
+
 }

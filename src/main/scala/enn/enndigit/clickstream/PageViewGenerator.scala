@@ -1,9 +1,8 @@
 package enn.enndigit.clickstream
 
-import java.io.{OutputStream, OutputStreamWriter, PrintWriter}
-import java.net.{InetAddress, ServerSocket, Socket}
-
-import scala.util.Random
+import java.io.PrintWriter
+import java.net.{ServerSocket, Socket}
+import java.util.Random
 
 /**
   * @Author:chenchen
@@ -14,13 +13,14 @@ import scala.util.Random
   */
 
 //点击流日志详细信息：url, status, zipCode, userID
-class PageView(url: String, status: Int, zipCode: Int, userID: Int) extends Serializable {
+//主构造方法
+class PageView(val url: String, val status: Int, val zipCode: Int, val userID: Int) extends Serializable {
   override def toString: String = {
     "%s\t%s\t%s\t%s\n".format(url, status, zipCode, userID)
   }
 }
 
-//构建点击流日志实体 PageView
+//构建点击流日志伴生对象 PageView
 object PageView extends Serializable {
   def fromString(in: String): PageView = {
     val parts: Array[String] = in.split("\t")
@@ -53,7 +53,7 @@ object PageViewGenerator {
 
   //获取指标
   def pickFromDistribution[T](inputMap: Map[T, Double]): T = {
-    var rand = Random.nextDouble()
+    var rand = new Random().nextDouble()
     var total = 0.0
     for ((item, prop) <- inputMap) {
       total = prop + total
@@ -92,7 +92,7 @@ object PageViewGenerator {
       new Thread() {
         override def run(): Unit = {
           println("got client coonected from: " + socket.getInetAddress)
-          val out: PrintWriter = new PrintWriter(socket.getOutputStream, true)
+          val out: PrintWriter = new PrintWriter(socket.getOutputStream(), true)
 
           while (true) {
             Thread.sleep(sleepDelayMs)
